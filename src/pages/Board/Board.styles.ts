@@ -9,13 +9,22 @@ export const StyledBoard = styled('div')`
     color: '#ee82ee';
   }
   .list-block {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    @media (min-width: 700px) {
-      grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
     }
-    @media (min-width: 945px) {
-      grid-template-columns: repeat(3, 1fr);
+    &::-webkit-scrollbar:horizontal {
+      height: 11px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      border: 2px solid white;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #fff;
+      border-radius: 8px;
     }
   }
 `;

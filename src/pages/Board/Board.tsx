@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import List from '../../components/List/List';
-import Button from '../../components/Button/Button';
+import Button from '../../components/AddButton/AddButton';
 import { StyledBoard } from './Board.styles';
 
 const state = {
@@ -22,6 +22,54 @@ const state = {
     },
     {
       id: 3,
+      title: 'Сделано',
+      cards: [
+        { id: 5, title: 'сделать домашку' },
+        { id: 6, title: 'погулять с собакой' },
+      ],
+    },
+    {
+      id: 4,
+      title: 'Сделано',
+      cards: [
+        { id: 5, title: 'сделать домашку' },
+        { id: 6, title: 'погулять с собакой' },
+      ],
+    },
+    {
+      id: 5,
+      title: 'Сделано',
+      cards: [
+        { id: 5, title: 'сделать домашку' },
+        { id: 6, title: 'погулять с собакой' },
+      ],
+    },
+    {
+      id: 6,
+      title: 'Сделано',
+      cards: [
+        { id: 5, title: 'сделать домашку' },
+        { id: 6, title: 'погулять с собакой' },
+      ],
+    },
+    {
+      id: 7,
+      title: 'Сделано',
+      cards: [
+        { id: 5, title: 'сделать домашку' },
+        { id: 6, title: 'погулять с собакой' },
+      ],
+    },
+    {
+      id: 8,
+      title: 'Сделано',
+      cards: [
+        { id: 5, title: 'сделать домашку' },
+        { id: 6, title: 'погулять с собакой' },
+      ],
+    },
+    {
+      id: 9,
       title: 'Сделано',
       cards: [
         { id: 5, title: 'сделать домашку' },
