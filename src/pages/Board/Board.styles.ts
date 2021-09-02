@@ -11,19 +11,24 @@ export const StyledBoard = styled('div')`
   .list-block {
     display: flex;
     overflow-x: auto;
+    align-items: flex-start;
+    height: calc(100vh - 32px);
     &::-webkit-scrollbar {
-      -webkit-appearance: none;
+      height: 12px;
+      width: 12px;
+    }
+    &::-webkit-scrollbar-track-piece {
+      background: #00000026;
+      background: #091e4214;
     }
     &::-webkit-scrollbar:horizontal {
-      height: 11px;
+      height: 12px;
     }
     &::-webkit-scrollbar-thumb {
       border-radius: 8px;
-      border: 2px solid white;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(255, 255, 255, 0.5);
     }
     &::-webkit-scrollbar-track {
-      background-color: #fff;
       border-radius: 8px;
     }
   }

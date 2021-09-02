@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+// import { RouteComponentProps } from 'react-router-dom';
 import List from '../../components/List/List';
 import Button from '../../components/AddButton/AddButton';
 import { StyledBoard } from './Board.styles';
@@ -79,6 +80,10 @@ const state = {
   ],
 };
 
+// type BoardType = {
+//   test: string;
+// };
+
 const Board: FC = () => (
   <StyledBoard>
     <h1 className="title">{state.title}</h1>
@@ -86,8 +91,8 @@ const Board: FC = () => (
       {Object.values(state.lists).map((item) => (
         <List title={item.title} cards={item.cards} key={item.id} />
       ))}
+      <Button />
     </div>
-    <Button />
   </StyledBoard>
 );
 

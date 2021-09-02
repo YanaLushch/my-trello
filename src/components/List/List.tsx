@@ -11,7 +11,7 @@ type ListProps = {
 
 const List: FC<ListProps> = ({ title, cards }) => (
   <StyledList>
-    <h2>{title}</h2>
+    <h2 className="title">{title}</h2>
     {cards.map((item) => (
       <Card title={item.title} />
     ))}
