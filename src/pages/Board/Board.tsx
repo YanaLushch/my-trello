@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 // import { RouteComponentProps } from 'react-router-dom';
 import List from '../../components/List/List';
-import Button from '../../components/AddButton/AddButton';
+import AddButton from '../../components/AddButton/AddButton';
 import { StyledBoard } from './Board.styles';
 
 const state = {
@@ -91,7 +91,7 @@ const Board: FC = () => (
       {Object.values(state.lists).map((item) => (
         <List title={item.title} cards={item.cards} key={item.id} />
       ))}
-      <Button />
+      <AddButton />
     </div>
   </StyledBoard>
 );

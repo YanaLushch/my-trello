@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import ICard from '../../common/interfaces/ICard';
-import Button from '../AddButton/AddButton';
+import AddButton from '../AddButton/AddButton';
 import Card from '../Card/Card';
 import { StyledList } from './List.styles';
 
@@ -15,7 +15,7 @@ const List: FC<ListProps> = ({ title, cards }) => (
     {cards.map((item) => (
       <Card title={item.title} />
     ))}
-    <Button />
+    <AddButton />
   </StyledList>
 );
 
