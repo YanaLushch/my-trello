@@ -1,36 +1,32 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { getBoards } from '../../api/boards';
 import AddButton from '../../components/AddButton/AddButton';
 import Board from '../../components/Board/Board';
+import { useApiCall } from '../../hooks/useApiCall';
 import { StyledHome } from './Home.styles';
 
 type HomeProps = {
   title: string;
 };
 
-const state = {
-  boards: [
-    { id: 1, title: 'покупки' },
-    { id: 2, title: 'подготовка к свадьбе' },
-    { id: 3, title: 'разработка интернет-магазина' },
-    { id: 4, title: 'курс по продвижению в соцсетях' },
-  ],
-};
-
 const Home: FC<HomeProps> = () => {
-  const match = useRouteMatch();
+  // const match = useRouteMatch();
+  const { state: boards, reload } = useApiCall(getBoards);
+
+  if (!boards) return null;
+
   return (
-    <Link to={`${match.url}/props-v-state`}>
-      <StyledHome>
-        <h1>My boards</h1>
-        <div className="boards">
-          {Object.values(state.boards).map((item) => (
-            <Board key={item.id} title={item.title} />
-          ))}
-        </div>
-        <AddButton />
-      </StyledHome>
-    </Link>
+    <StyledHome>
+      <h1>My boards</h1>
+      <div className="boards">
+        {Object.values((boards as any).boards).map((item) => (
+          <Board key={(item as any).id} title={(item as any).title} />
+        ))}
+      </div>
+      <AddButton />
+      <button onClick={reload}>Reload</button>
+    </StyledHome>
   );
 };
 

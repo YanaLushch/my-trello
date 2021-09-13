@@ -1,99 +1,29 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC } from 'react';
 // import { RouteComponentProps } from 'react-router-dom';
 import List from '../../components/List/List';
 import AddButton from '../../components/AddButton/AddButton';
 import { StyledBoard } from './Board.styles';
+import { getBoardCards } from '../../api/boards';
+import { useApiCall } from '../../hooks/useApiCall';
 
-const state = {
-  title: 'Моя тестовая доска',
-  lists: [
-    {
-      id: 1,
-      title: 'Планы',
-      cards: [
-        { id: 1, title: 'помыть кота' },
-        { id: 2, title: 'приготовить суп' },
-        { id: 3, title: 'сходить в магазин' },
-      ],
-    },
-    {
-      id: 2,
-      title: 'В процессе',
-      cards: [{ id: 4, title: 'посмотреть сериал' }],
-    },
-    {
-      id: 3,
-      title: 'Сделано',
-      cards: [
-        { id: 5, title: 'сделать домашку' },
-        { id: 6, title: 'погулять с собакой' },
-      ],
-    },
-    {
-      id: 4,
-      title: 'Сделано',
-      cards: [
-        { id: 5, title: 'сделать домашку' },
-        { id: 6, title: 'погулять с собакой' },
-      ],
-    },
-    {
-      id: 5,
-      title: 'Сделано',
-      cards: [
-        { id: 5, title: 'сделать домашку' },
-        { id: 6, title: 'погулять с собакой' },
-      ],
-    },
-    {
-      id: 6,
-      title: 'Сделано',
-      cards: [
-        { id: 5, title: 'сделать домашку' },
-        { id: 6, title: 'погулять с собакой' },
-      ],
-    },
-    {
-      id: 7,
-      title: 'Сделано',
-      cards: [
-        { id: 5, title: 'сделать домашку' },
-        { id: 6, title: 'погулять с собакой' },
-      ],
-    },
-    {
-      id: 8,
-      title: 'Сделано',
-      cards: [
-        { id: 5, title: 'сделать домашку' },
-        { id: 6, title: 'погулять с собакой' },
-      ],
-    },
-    {
-      id: 9,
-      title: 'Сделано',
-      cards: [
-        { id: 5, title: 'сделать домашку' },
-        { id: 6, title: 'погулять с собакой' },
-      ],
-    },
-  ],
+const Board: FC = () => {
+  const { state: list, reload } = useApiCall(getBoardCards);
+
+  if (!list) return null;
+
+  return (
+    <StyledBoard>
+      <h1 className="title">{(list as any).title}</h1>
+      <div className="list-block">
+        {Object.values((list as any).lists).map((item) => (
+          <List title={(item as any).title} cards={(item as any).cards} key={(item as any).id} />
+        ))}
+        <AddButton />
+        <button onClick={reload}>Reload</button>
+      </div>
+    </StyledBoard>
+  );
 };
-
-// type BoardType = {
-//   test: string;
-// };
-
-const Board: FC = () => (
-  <StyledBoard>
-    <h1 className="title">{state.title}</h1>
-    <div className="list-block">
-      {Object.values(state.lists).map((item) => (
-        <List title={item.title} cards={item.cards} key={item.id} />
-      ))}
-      <AddButton />
-    </div>
-  </StyledBoard>
-);
 
 export default Board;
