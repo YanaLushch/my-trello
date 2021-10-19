@@ -1,5 +1,5 @@
 // src/store/modules/boards/reducer.ts
-import IBoard from '../../../common/interfaces/IBoard'; // не забудьте описать этот интерфейс :)
+import IBoard from '../../../common/interfaces/IBoard';
 
 const initialState = {
   boards: [] as IBoard[],
