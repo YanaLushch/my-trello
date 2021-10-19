@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-// import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import List from '../../components/List/List';
 import AddButton from '../../components/AddButton/AddButton';
 import { StyledBoard } from './Board.styles';
@@ -80,13 +80,18 @@ const state = {
   ],
 };
 
-// type BoardType = {
-//   test: string;
-// };
+type BoardType = {
+  boardId: string;
+};
 
-const Board: FC = () => (
+const Board: FC<RouteComponentProps<BoardType>> = ({
+  match: {
+    params: { boardId },
+  },
+}) => (
   <StyledBoard>
     <h1 className="title">{state.title}</h1>
+    <h2>{boardId}</h2>
     <div className="list-block">
       {Object.values(state.lists).map((item) => (
         <List title={item.title} cards={item.cards} key={item.id} />

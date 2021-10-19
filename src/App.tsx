@@ -8,9 +8,9 @@ const App: FC = () => (
   <Router>
     <div className="App">
       <Switch>
-        <Route path="/board/:id" component={Board} />
+        <Route exact path="/" component={Home} />
+        <Route path="/board/:boardId" component={Board} />
       </Switch>
-      <Route path="/" component={Home} />
     </div>
   </Router>
 );
