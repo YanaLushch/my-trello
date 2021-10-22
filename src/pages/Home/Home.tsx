@@ -1,49 +1,40 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC } from 'react';
-// import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { FC, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { connect, ConnectedProps } from 'react-redux';
 import AddButton from '../../components/AddButton/AddButton';
-// import Board from '../../components/Board/Board';
+import { getBoards } from '../../store/modules/boards/actions';
+import Board from '../../components/Board/Board';
 import { StyledHome } from './Home.styles';
+import { RootState } from '../../store/store';
+import IBoard from '../../common/interfaces/IBoard';
 
-// type propsType = {
-//   boards: [];
-// };
-type stateType = {};
+type HomeProps = PropsFromRedux;
 
-// type HomeProps = {
-//   title: string;
-// };
+const Home: FC<HomeProps> = ({ boards, getBoards: boardsFunc }) => {
+  useEffect(() => {
+    boardsFunc();
+  }, []);
+  return (
+    <StyledHome>
+      <h1>My boards</h1>
+      <div className="boards">
+        {Object.values(boards).map((item) => (
+          <Link to={`/board/${item.id}`}>
+            <Board key={item.id} title={item.title} />
+          </Link>
+        ))}
+      </div>
+      <AddButton />
+    </StyledHome>
+  );
+};
 
-// const state = {
-//   boards: [
-//     { id: 1, title: 'покупки' },
-//     { id: 2, title: 'подготовка к свадьбе' },
-//     { id: 3, title: 'разработка интернет-магазина' },
-//     { id: 4, title: 'курс по продвижению в соцсетях' },
-//   ],
-// };
-
-const Home: FC<stateType> = (props) => (
-  <StyledHome>
-    <h1>My boards</h1>
-    {console.log(props)}
-    {/* <div className="boards">
-      {Object.values(state.boards).map((item) => (
-        <Link to={`/board/${item.id}`}>
-          <Board key={item.id} title={item.title} />
-        </Link>
-      ))}
-    </div> */}
-    <AddButton />
-  </StyledHome>
-);
-
-const mapStateToProps = (state): any => ({
+const mapStateToProps = (state: RootState): { boards: IBoard[] } => ({
   ...state.boards,
 });
 
-export default connect(mapStateToProps, {})(Home);
+const connector = connect(mapStateToProps, { getBoards });
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(Home);

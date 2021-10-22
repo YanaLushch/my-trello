@@ -5,10 +5,10 @@ const instance = axios.create({
   baseURL: api.baseURL,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: 'Bearer 123', // к этому мы ещё вернёмся как-нибудь потом
+    Authorization: 'Bearer 123',
   },
 });
 
-instance.interceptors.response.use((res) => res.data);
+// instance.interceptors.response.use((res) => res.data);
 
 export default instance;
