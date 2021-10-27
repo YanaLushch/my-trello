@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { StyledBoard } from './Board.styles';
+import { StyledBoard } from './SingleBoard.styles';
 
 type BoardProps = {
   title: string;

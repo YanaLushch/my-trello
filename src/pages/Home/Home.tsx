@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect, ConnectedProps } from 'react-redux';
 import AddButton from '../../components/AddButton/AddButton';
 import { getBoards } from '../../store/modules/boards/actions';
-import Board from '../../components/Board/Board';
+import Board from '../../components/SingleBoard/SingleBoard';
 import { StyledHome } from './Home.styles';
 import { RootState } from '../../store/store';
 import IBoard from '../../common/interfaces/IBoard';

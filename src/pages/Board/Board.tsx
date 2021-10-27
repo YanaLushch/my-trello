@@ -12,10 +12,6 @@ interface BoardRouteParams {
   boardId: string;
 }
 
-// interface BoardProps {
-//   title: string;
-// }
-
 const Board: FC<RouteComponentProps<BoardRouteParams> & PropsFromRedux> = ({
   match: {
     params: { boardId },
@@ -24,10 +20,12 @@ const Board: FC<RouteComponentProps<BoardRouteParams> & PropsFromRedux> = ({
   board,
 }) => {
   useEffect(() => {
-    console.log('boardFunc', boardId);
     boardFunc(boardId);
   }, []);
-  if (board === null) {
+  if (!board) {
+    return null;
+  }
+  if (!board.lists) {
     return null;
   }
   return (
