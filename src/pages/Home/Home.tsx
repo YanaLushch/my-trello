@@ -19,8 +19,8 @@ const Home: FC<HomeProps> = ({ boards, getBoards: boardsFunc }) => {
       <h1>My boards</h1>
       <div className="boards">
         {Object.values(boards).map((item) => (
-          <Link to={`/board/${item.id}`}>
-            <Board key={item.id} title={item.title} />
+          <Link to={`/board/${item.id}`} key={item.id}>
+            <Board title={item.title} />
           </Link>
         ))}
       </div>
