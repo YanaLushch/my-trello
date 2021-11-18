@@ -19,6 +19,7 @@ specifiers:
   react-router-dom: ^5.2.0
   react-scripts: 4.0.3
   redux: ^4.1.1
+  redux-devtools-extension: ^2.13.9
   redux-thunk: ^2.3.0
   sass: ^1.38.0
   styled-components: ^5.3.0
@@ -43,6 +44,7 @@ dependencies:
   react-router-dom: 5.2.1_react@17.0.2
   react-scripts: 4.0.3_ded7eca58bddd72288f2bd6418816d9f
   redux: 4.1.1
+  redux-devtools-extension: 2.13.9_redux@4.1.1
   redux-thunk: 2.3.0
   sass: 1.38.2
   styled-components: 5.3.1_react-dom@17.0.2+react@17.0.2
@@ -10465,6 +10467,14 @@ packages:
     dependencies:
       indent-string: 4.0.0
       strip-indent: 3.0.0
+    dev: false
+
+  /redux-devtools-extension/2.13.9_redux@4.1.1:
+    resolution: {integrity: sha512-cNJ8Q/EtjhQaZ71c8I9+BPySIBVEKssbPpskBfsXqb8HJ002A3KRVHfeRzwRo6mGPqsm7XuHTqNSNeS1Khig0A==}
+    peerDependencies:
+      redux: ^3.1.0 || ^4.0.0
+    dependencies:
+      redux: 4.1.1
     dev: false
 
   /redux-thunk/2.3.0:
