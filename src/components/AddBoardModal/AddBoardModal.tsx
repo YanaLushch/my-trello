@@ -2,12 +2,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { FC, useState } from 'react';
 import { Modal, Button } from 'antd';
+import { connect, ConnectedProps } from 'react-redux';
+import { Action } from 'redux';
 import 'antd/dist/antd.css';
+import { ThunkDispatch } from 'redux-thunk';
+import { RootState } from '../../store/store';
+import { createBoard as createBoardAction } from '../../store/modules/boards/actions';
 
-const AddBoardModal: FC = () => {
+type HomeProps = PropsFromRedux;
+
+const AddBoardModal: FC<HomeProps> = ({ createBoard }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const [confirmLoading, setConfirmLoading] = React.useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [confirmLoading, setConfirmLoading] = useState(false);
 
   const handleInputChange = (e: any): void => {
     setInputValue(e.target.value);
@@ -16,13 +24,9 @@ const AddBoardModal: FC = () => {
   const showModal = (): void => {
     setIsModalVisible(true);
   };
-
-  const handleOk = (): void => {
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setIsModalVisible(false);
-      setConfirmLoading(false);
-    }, 2000);
+  const onInputUpdate = async (): Promise<void> => {
+    await createBoard(inputValue);
+    setIsModalVisible(false);
   };
 
   const handleCancel = (): void => {
@@ -37,7 +41,7 @@ const AddBoardModal: FC = () => {
         title="Add the title"
         visible={isModalVisible}
         confirmLoading={confirmLoading}
-        onOk={handleOk}
+        onOk={onInputUpdate}
         onCancel={handleCancel}
       >
         <input value={inputValue} onChange={handleInputChange} />
@@ -47,4 +51,19 @@ const AddBoardModal: FC = () => {
   );
 };
 
-export default AddBoardModal;
+interface IConnectedDispatch {
+  createBoard: (input: string) => Promise<void>;
+}
+
+// eslint-disable-next-line arrow-body-style
+const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, void, Action>): IConnectedDispatch => {
+  return {
+    createBoard: (input): Promise<void> => dispatch(createBoardAction(input)),
+  };
+};
+
+const connector = connect(null, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(AddBoardModal);

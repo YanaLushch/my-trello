@@ -22,6 +22,11 @@ const reducer = (state = initialState, action: { type: string; payload: Payload 
         ...state,
         boards: action.payload,
       };
+    case 'CREATE_BOARD':
+      return {
+        ...state,
+        boards: action.payload,
+      };
   }
 };
 
