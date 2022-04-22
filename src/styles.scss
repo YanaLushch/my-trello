@@ -21,3 +21,11 @@ html [type='button'],
   -webkit-appearance: none;
   border: none;
 }
+
+body {
+  .ant-modal-root {
+    .validation-message {
+      color: red;
+    }
+  }
+}

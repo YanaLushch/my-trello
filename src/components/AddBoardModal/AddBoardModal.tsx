@@ -1,69 +1,44 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-alert */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { FC, useState } from 'react';
-import { Modal, Button } from 'antd';
-import { connect, ConnectedProps } from 'react-redux';
-import { Action } from 'redux';
-import 'antd/dist/antd.css';
-import { ThunkDispatch } from 'redux-thunk';
-import { RootState } from '../../store/store';
-import { createBoard as createBoardAction } from '../../store/modules/boards/actions';
+import React, { FC, useEffect, useState } from 'react';
+import { Modal } from 'antd';
 
-type HomeProps = PropsFromRedux;
+type AddBoardModalProps = {
+  handleCancel: () => void;
+  isModalVisible: boolean;
+  onSave: CallableFunction;
+  title: string;
+  initialValue?: string | null;
+};
 
-const AddBoardModal: FC<HomeProps> = ({ createBoard }) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+const AddBoardModal: FC<AddBoardModalProps> = ({ handleCancel, isModalVisible, onSave, title, initialValue }) => {
   const [inputValue, setInputValue] = useState('');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    if (initialValue !== undefined && initialValue !== null) {
+      setInputValue(initialValue);
+    }
+  }, [initialValue]);
 
   const handleInputChange = (e: any): void => {
     setInputValue(e.target.value);
   };
-
-  const showModal = (): void => {
-    setIsModalVisible(true);
-  };
-  const onInputUpdate = async (): Promise<void> => {
-    await createBoard(inputValue);
-    setIsModalVisible(false);
+  const onInputUpdate = (): void => {
+    onSave(inputValue);
+    setInputValue('');
   };
 
-  const handleCancel = (): void => {
-    setIsModalVisible(false);
-  };
   return (
-    <>
-      <Button type="primary" onClick={showModal}>
-        Open Modal
-      </Button>
-      <Modal
-        title="Add the title"
-        visible={isModalVisible}
-        confirmLoading={confirmLoading}
-        onOk={onInputUpdate}
-        onCancel={handleCancel}
-      >
-        <input value={inputValue} onChange={handleInputChange} />
-        {/* <input type="submit" value="submit" onClick={handleSubmitButton} /> */}
-      </Modal>
-    </>
+    <Modal title={title} visible={isModalVisible} onOk={onInputUpdate} onCancel={handleCancel} closable>
+      <input value={inputValue} onChange={handleInputChange} />
+      {errorMessage !== '' ? <div className="validation-message">{errorMessage}</div> : ''}
+    </Modal>
   );
 };
 
-interface IConnectedDispatch {
-  createBoard: (input: string) => Promise<void>;
-}
+AddBoardModal.defaultProps = { initialValue: null };
 
-// eslint-disable-next-line arrow-body-style
-const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, void, Action>): IConnectedDispatch => {
-  return {
-    createBoard: (input): Promise<void> => dispatch(createBoardAction(input)),
-  };
-};
-
-const connector = connect(null, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-export default connector(AddBoardModal);
+export default AddBoardModal;

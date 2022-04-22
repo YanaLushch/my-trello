@@ -4,6 +4,7 @@ import './index.css';
 import { Provider } from 'react-redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'antd/dist/antd.css';
 import './styles.scss';
 import store from './store/store';
 

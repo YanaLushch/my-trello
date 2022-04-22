@@ -11,7 +11,7 @@ const initialState: State = {
   boards: [],
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/default-param-last
 const reducer = (state = initialState, action: { type: string; payload: Payload }): State => {
   switch (action.type) {
     default: {
